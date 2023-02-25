@@ -4,6 +4,8 @@ const ejs = require("ejs");
 const path = require("path");
 const bodyParser = require("body-parser");
 const BlogPost = require("./models/BlogPost.js");
+const fileUpload = require("express-fileupload");
+
 const app = new express();
 
 mongoose.set("strictQuery", false);
@@ -18,9 +20,12 @@ mongoose
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(fileUpload());
 app.set("views", path.join(__dirname, "./public/views"));
 
 app.use(express.json());
+
+//File Upload initialization
 
 //BodyParser
 app.use(bodyParser.json());
@@ -41,8 +46,9 @@ app.get("/about", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
-app.get("/post", (req, res) => {
-  res.render("post");
+app.get("/post/:id", async (req, res) => {
+  const blogpost = await BlogPost.findById(req.params.id);
+  res.render("post", { blogpost });
 });
 app.get("/posts/new", (req, res) => {
   res.render("create");
@@ -50,10 +56,24 @@ app.get("/posts/new", (req, res) => {
 
 //Post requests
 app.post("/posts/store", async (req, res) => {
-  //   const { title, body } = req.body;
-  //   const obj = JSON.stringify(req.body);
-  console.log(req.body);
-  await BlogPost.create(req.body, (error, blogpost) => {
+  //   const files = req.files;
+  let image = req.files.image;
+  //   console.log(req);
+  console.log(req.files);
+  //   console.log(req);
+  image.mv(path.resolve(___dirname, "./public/img", image.name));
+  async (error) => {
+    await BlogPost.create({ ...req.body, image: "/img/" + image.name });
     res.redirect("/");
-  });
+  };
 });
+
+// //Post requests
+// app.post("/posts/store", async (req, res) => {
+//     //   const { title, body } = req.body;
+//     //   const obj = JSON.stringify(req.body);
+//     console.log(req.body);
+//     await BlogPost.create(req.body, (error, blogpost) => {
+//       res.redirect("/");
+//     });
+//   });
