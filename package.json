@@ -1,0 +1,30 @@
+{
+  "name": "blog-site-test",
+  "version": "1.0.0",
+  "description": "Learning Express, MongoDB and Node",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GhostArena/menBlogSite.git"
+  },
+  "author": "GhostArena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GhostArena/menBlogSite/issues"
+  },
+  "homepage": "https://github.com/GhostArena/menBlogSite#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongodb": "^5.1.0",
+    "mongoose": "^6.10.0",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7"
+  }
+}
