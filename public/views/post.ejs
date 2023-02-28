@@ -7,7 +7,7 @@
     <!-- Page Header-->
     <header
       class="masthead"
-      style="background-image: url('<%= blogposts.image%>')"
+      style="background-image: url('<%= blogpost.image %>')"
     >
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -16,8 +16,8 @@
               <h1><%= blogpost.title %></h1>
               <h2 class="subheading"><%= blogpost.body %></h2>
               <span class="meta">
-                <a href="#"><%= blogposts[i].username %></a> on <%=
-                blogposts[i].datePosted.toDateString() %>
+                <a href="#"><%= blogpost.username %></a> on <%=
+                blogpost.datePosted.toDateString() %>
               </span>
             </div>
           </div>
