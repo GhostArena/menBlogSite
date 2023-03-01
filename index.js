@@ -63,10 +63,13 @@ app.post("/posts/store", async (req, res) => {
   //   const files = req.files;
   let image = req.files.image;
   image.mv(path.resolve(__dirname, "./public/img", image.name));
-  await BlogPost.create({
-    ...req.body,
-    image: "/img/" + image.name,
-  });
+  await BlogPost.create(
+    {
+      ...req.body,
+      image: "/img/" + image.name,
+    }
+    // customValidation
+  );
 
   res.redirect("/");
   console.log(req.body);
@@ -75,6 +78,14 @@ app.post("/posts/store", async (req, res) => {
   // //   console.log(req);
   // //   console.log(req);
 });
+
+//Custom Middleware (Validation)
+// const customValidation = (req, res, next) => {
+//   if (req.files == null || req.body.title == null) {
+//     return res.redirect("/posts/new");
+//   }
+//   next();
+// };
 
 // //Post requests
 // app.post("/posts/store", async (req, res) => {
